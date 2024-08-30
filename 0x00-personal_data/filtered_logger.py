@@ -68,7 +68,7 @@ def get_logger() -> logging.Logger:
     2. Create logger
     """
     logger = logging.getLogger(name="user_data")
-    logger.setLevel(level=logging.INFO)
+    logger.setLevel(logging.INFO)
     logger.propagate = False
 
     stream_handler = logging.StreamHandler()
