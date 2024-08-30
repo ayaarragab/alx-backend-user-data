@@ -81,35 +81,19 @@ def get_logger() -> logging.Logger:
 
     return logger
 
+
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """ Returns a connector to a MySQL database """
-
+    query = """ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+            FLUSH PRIVILEGES;"""
+    
     username = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
     password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
     host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
     db_name = os.getenv("PERSONAL_DATA_DB_NAME")
 
-    initial_connection = mysql.connector.connection.MySQLConnection(
-        user=username,
-        password=password,
-        host=host
-    )
-
-    query = """
-    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
-    FLUSH PRIVILEGES;
-    """
-
-    cursor = initial_connection.cursor()
-    cursor.execute(query)
-    cursor.close()
-    initial_connection.close()
-
-    cnx = mysql.connector.connection.MySQLConnection(
-        user=username,
-        password=password,
-        host=host,
-        database=db_name
-    )
-
+    cnx = mysql.connector.connection.MySQLConnection(user=username,
+                                                     password=password,
+                                                     host=host,
+                                                     database=db_name)
     return cnx
