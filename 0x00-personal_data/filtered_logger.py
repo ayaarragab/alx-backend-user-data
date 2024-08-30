@@ -15,7 +15,7 @@ log line (message)
 import re
 from typing import List
 import logging
-import mysql
+import mysql.connector
 from os import environ
 
 import mysql.connector
