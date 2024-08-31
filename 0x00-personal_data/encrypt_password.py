@@ -16,8 +16,8 @@ def hash_password(password: str) -> ByteString:
     string argument name password and returns
     a salted, hashed password, which is a byte string
     """
-    password = b"an incredibly long password" * 10
-    hashed = bcrypt.hashpw(
+    password: str = b"an incredibly long password" * 10
+    hashed: ByteString = bcrypt.hashpw(
         base64.b64encode(hashlib.sha256(password).digest()),
         bcrypt.gensalt()
     )
