@@ -6,6 +6,7 @@ from user import User
 from user import Base
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
+from typing import Dict
 
 
 class DB:
@@ -40,7 +41,7 @@ class DB:
 
         return user
 
-    def find_user_by(self, **kwargs):
+    def find_user_by(self, **kwargs: Dict) -> User:
         """
         finds user by specific attrs
         """
