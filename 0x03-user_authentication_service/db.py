@@ -62,10 +62,9 @@ class DB:
 
         return user
 
-    def update_user(self, user_id: int, **kwargs: Dict) -> None:
-        """
-        update user by key word args
-        Return: First row found in the users table as filtered by kwargs
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """ Update users attributes
+        Returns: None
         """
         user = self.find_user_by(id=user_id)
 
