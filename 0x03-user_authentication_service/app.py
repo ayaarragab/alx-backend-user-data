@@ -55,15 +55,23 @@ def login() -> str:
 
 
 @app.route('/profile', methods=['GET'])
-def logout() -> str:
-    """logout
+def profile() -> str:
+    """ If the user exist, respond with a 200 HTTP status and a JSON Payload
+    Otherwise respond with a 403 HTTP status.
     """
-    session_id = request.cookies['session_id']
-    user = AUTH.get_user_from_session_id(session_id)
-    if user:
-        return jsonify({"email": user.email}), 200
-    else:
+    session_id = request.cookies.get("session_id", None)
+
+    if session_id is None:
         abort(403)
+
+    user = AUTH.get_user_from_session_id(session_id)
+
+    if user is None:
+        abort(403)
+
+    msg = {"email": user.email}
+
+    return jsonify(msg), 200
 
 
 if __name__ == "__main__":
