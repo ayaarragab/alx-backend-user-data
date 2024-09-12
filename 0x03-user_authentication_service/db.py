@@ -73,11 +73,8 @@ class DB:
         column_names = User.__table__.columns.keys()
         for key in kwargs.keys():
             if key not in column_names:
-                raise InvalidRequestError
+                raise ValueError
         user = self._session.query(User).filter_by(id=user_id).first()
-
-        if user is None:
-            raise NoResultFound
 
         for key, value in kwargs.items():
             setattr(user, key, value)
