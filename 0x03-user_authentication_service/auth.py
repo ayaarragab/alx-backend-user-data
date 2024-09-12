@@ -43,6 +43,7 @@ class Auth:
         except NoResultFound:
             return False
 
+
 def _hash_password(password: str) -> bytes:
     """ Returns byte string password """
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
