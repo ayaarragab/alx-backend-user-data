@@ -4,7 +4,7 @@
 from flask import Flask, jsonify
 
 
-app = Flask()
+app = Flask(__name__)
 
 
 @app.route('/', methods=['GET'])
