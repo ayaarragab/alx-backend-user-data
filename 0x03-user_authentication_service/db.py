@@ -2,7 +2,7 @@
 """
 DB MODULE
 """
-from sqlalchemy import create_engine, select
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import User
@@ -50,7 +50,8 @@ class DB:
         """
         if not kwargs:
             raise InvalidRequestError
-        column_names = User.__table__.columns.keys()        for key in kwargs:
+        column_names = User.__table__.columns.keys()        
+        for key in kwargs.keys():
             if key not in column_names:
                 raise InvalidRequestError
         user = self._session.query(User).filter_by(**kwargs).first()
