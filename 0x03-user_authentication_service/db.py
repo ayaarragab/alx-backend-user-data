@@ -67,9 +67,6 @@ class DB:
         update user by key word args
         Return: First row found in the users table as filtered by kwargs
         """
-        if not kwargs:
-            raise InvalidRequestError
-
         column_names = User.__table__.columns.keys()
         for key in kwargs.keys():
             if key not in column_names:
